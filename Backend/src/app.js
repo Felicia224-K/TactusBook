@@ -9,11 +9,20 @@ const PORT = 5000;
 
 app.use(cors());
 app.use(express.json());
+app.use('/api/auth', require('../src/routes/auth'));
 
 app.get('/api/health', (req, res) => {
   console.log(`The status is running on: http://localhost:${PORT}/api/health`);
   res.status(200).json({ status: 'ok' });
   
 });
+
+app.get('/api/auth', (req, res) => {
+  console.log(`The status is running on: http://localhost:${PORT}/api/health`);
+  res.status(200).json({ status: 'ok' });
+  
+});
+
+
 
 module.exports = app;
