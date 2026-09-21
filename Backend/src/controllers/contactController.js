@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { Contact } = require('../models');
 
 /**
@@ -13,11 +14,24 @@ const { Contact } = require('../models');
  */
 exports.getAll = async (req, res) => {
   try {
-    const contacts = await Contact.findAll({
-      where: { userId: req.user.id },
-      order: [['createdAt', 'DESC']],
-    });
+    const { search, status } = req.query;
+    const  where = { userId: req.user.id };
 
+     if (status) {
+        where.status = status;
+     }
+
+     if (search) {
+        where[Op.or] = [
+            { name: { [Op.iLike]: `%${search}%` } },
+            { company: { [Op.iLike]: `%${search}%` } },
+        ];
+     }
+     const contacts = await Contact.findAll({
+        where,
+        order: [['creatAt', 'DESC']],
+     });
+      
     return res.status(200).json({ success: true, contacts });
   } catch (err) {
     console.error('Get contacts error:', err);
@@ -34,14 +48,6 @@ exports.getAll = async (req, res) => {
 exports.create = async (req, res) => {
   try {
     const { name, email, phone, company, status, notes } = req.body;
-
-    if (!name || name.trim() === '') {
-      return res.status(400).json({
-        success: false,
-        errors: [{ msg: 'Name is required' }],
-      });
-    }
-
     const contact = await Contact.create({
       name,
       email: email || null,
@@ -115,12 +121,7 @@ exports.update = async (req, res) => {
 
     const { name, email, phone, company, status, notes } = req.body;
 
-    if (name !== undefined && name.trim() === '') {
-      return res.status(400).json({
-        success: false,
-        errors: [{ msg: 'Name cannot be empty' }],
-      });
-    }
+
 
     // Only overwrite fields that were actually sent
     await contact.update({
