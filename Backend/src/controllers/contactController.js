@@ -29,7 +29,7 @@ exports.getAll = async (req, res) => {
      }
      const contacts = await Contact.findAll({
         where,
-        order: [['creatAt', 'DESC']],
+        order: [['createdAt', 'DESC']],
      });
       
     return res.status(200).json({ success: true, contacts });
