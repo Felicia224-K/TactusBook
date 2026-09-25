@@ -12,6 +12,8 @@ export default function Register() {
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+const [isHovered, setIsHovered ] = useState(false);
+
   async function handleSubmit(e) {
     e.preventDefault();
     setError('');
@@ -39,8 +41,18 @@ export default function Register() {
   }
 
   return (
-    <div style={{ maxWidth: 400, margin: '4rem auto' }}>
-      <h1>Register</h1>
+    <div style={{ 
+            width: '30rem',
+            height: '22rem',
+            textAlign: 'center', 
+            backgroundColor: 'red',
+            borderRadius: '20px',
+            padding: '100px',
+            backgroundColor:  '#BDB2FF',
+            margin: '4rem auto',
+            boxShadow: '1px 1px 5px'
+        }}>
+      <h1 >Register</h1>
 
       <form onSubmit={handleSubmit}>
         <div>
@@ -49,9 +61,17 @@ export default function Register() {
           <input
             id="name"
             type="text"
+            placeholder="Enter your full name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            style= {{
+                border: 'none',
+                borderRadius: '5px',
+                width: '200px',
+                height: '30px',
+                boxShadow: '1px 1px 5px'
+            }}
           />
         </div>
 
@@ -61,9 +81,18 @@ export default function Register() {
           <input
             id="email"
             type="email"
+            placeholder="Enter your email adress"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            style= {{
+                border: 'none',
+                borderRadius: '5px',
+                width: '200px',
+                height: '30px',
+                boxShadow: '1px 1px 5px',
+              
+            }}
           />
         </div>
 
@@ -73,15 +102,40 @@ export default function Register() {
           <input
             id="password"
             type="password"
+            placeholder="Set a password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            style= {{
+                border: 'none',
+                borderRadius: '5px',
+                width: '200px',
+                height: '30px',
+                boxShadow: '1px 1px 5px'
+            }}
           />
         </div>
 
         {error && <p style={{ color: 'red', marginTop: '1rem' }}>{error}</p>}
 
-        <button type="submit" disabled={isSubmitting} style={{ marginTop: '1rem' }}>
+        <button 
+            type="submit" 
+            disabled={isSubmitting}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)} 
+            style={{ 
+                marginTop: '1rem',
+                marginTop: '1rem',
+                backgroundColor:  isHovered? 'rgb(191, 182, 239)' : 'rgb(25, 112, 251)',
+                width: '100px',
+                height: '30px',
+                fontSize: '20px',
+                border: 'none',
+                borderRadius: '20px',
+                cursor: 'pointer',
+                boxShadow: isHovered ? '2px 2px 10px rgba(0,0,0,0.3)' : '2px 2px 10px rgba(186, 114, 114, 0.2)',
+                transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+            }}>
           {isSubmitting ? 'Creating account...' : 'Register'}
         </button>
       </form>

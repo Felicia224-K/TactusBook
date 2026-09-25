@@ -11,6 +11,10 @@ export default function Login() {
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+
+  const [isHovered, setIsHovered ] = useState(false);
+
+
   // If already logged in, don't show the login form at all.
   if (isAuthenticated) {
     return <Navigate to="/contacts" replace />;
@@ -33,8 +37,24 @@ export default function Login() {
   }
 
   return (
-    <div style={{ maxWidth: 400, margin: '4rem auto' }}>
-      <h1>Log in</h1>
+    <div 
+    style={{
+        width: '30rem',
+        height: '22rem',
+        textAlign: 'center', 
+        backgroundColor: 'red',
+        borderRadius: '20px',
+        padding: '100px',
+        backgroundColor: '#BDB2FF',
+        margin: '4rem auto' 
+
+    }}>
+
+
+
+
+
+      <h1 style={{ fontSize: '30px'}}>Log into your Account</h1>
 
       <form onSubmit={handleSubmit}>
         <div>
@@ -43,9 +63,17 @@ export default function Login() {
           <input
             id="email"
             type="email"
+            placeholder="Enter your email adress"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+             style= {{ 
+                border: 'none',
+                borderRadius: '5px',
+                width: '200px',
+                height: '30px',
+                boxShadow: '1px 1px 5px' 
+            }}
           />
         </div>
 
@@ -55,20 +83,49 @@ export default function Login() {
           <input
             id="password"
             type="password"
+            placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            style= {{ 
+                border: 'none',
+                borderRadius: '5px',
+                width: '200px',
+                height: '30px',
+                boxShadow: '1px 1px 5px'  
+
+            }}
           />
         </div>
 
         {error && <p style={{ color: 'red', marginTop: '1rem' }}>{error}</p>}
 
-        <button type="submit" disabled={isSubmitting} style={{ marginTop: '1rem' }}>
+        <button 
+            type="submit" 
+            disabled={isSubmitting}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)} 
+            style={{ 
+                marginTop: '1rem',
+                backgroundColor: isHovered? 'rgb(191, 182, 239)' : 'rgb(25, 112, 251)',
+                width: '100px',
+                height: '30px',
+                fontSize: '20px',
+                border: 'none',
+                borderRadius: '20px',
+                cursor: 'pointer',
+                boxShadow: isHovered ? '2px 2px 10px rgba(0,0,0,0.3)' : '2px 2px 10px rgba(0,0,0,0.2)',
+                transform: isHovered ? 'scale(1.05)' : 'scale(1)',   
+
+
+              
+                
+            }}>
           {isSubmitting ? 'Logging in...' : 'Log in'}
         </button>
       </form>
 
-      <p style={{ marginTop: '1rem' }}>
+      <p style={{ marginTop: '1rem', textAlign: 'center'  }}>
         No account? <Link to="/register">Register</Link>
       </p>
     </div>
