@@ -2,14 +2,15 @@ import { useState } from 'react';
 
 const STATUS_OPTIONS = ['lead', 'prospect', 'client', 'inactif'];
 
-const EMPTY_FORM = { name: '', email: '', phone: '', company: '', status: 'lead', notes: '' };
+const EMPTY_FORM = { name: '', email: '', phone: '', company: '', status: 'client', notes: '' };
 
 const inputStyle = {
   width: '100%',
   padding: '0.5rem 0.75rem',
-  border: '1px solid #d1d5db',
+  border: '1px solid #dfe8f5',
   borderRadius: 6,
   boxSizing: 'border-box',
+  boxShadow: '1px 1px 1px'
 };
 
 export default function ContactForm({ initialContact, onSave, onCancel }) {
@@ -58,12 +59,17 @@ export default function ContactForm({ initialContact, onSave, onCancel }) {
   return (
     <form
       onSubmit={handleSubmit}
-      style={{ border: '1px solid #d1d5db', borderRadius: 8, padding: '1rem', marginBottom: '1.5rem' }}
+      style={{ 
+            border: '1px solid #0f5bcd', 
+            borderRadius: 8, padding: '1rem', 
+            boxShadow: '1px 1px 5px',
+            marginBottom: '1.5rem',
+        }}
     >
       <h2 style={{ marginTop: 0 }}>{initialContact ? 'Edit Contact' : 'Add Contact'}</h2>
 
       <div>
-        <label htmlFor="name">Name *</label>
+        <label htmlFor="name" >Name *</label>
         <br />
         <input id="name" type="text" value={form.name} onChange={handleChange('name')} required style={inputStyle} />
       </div>
@@ -119,10 +125,29 @@ export default function ContactForm({ initialContact, onSave, onCancel }) {
       )}
 
       <div style={{ marginTop: '1rem', display: 'flex', gap: '0.5rem' }}>
-        <button type="submit" disabled={isSubmitting}>
+        <button 
+                type="submit" 
+                disabled={isSubmitting} 
+                style={{
+                    backgroundColor: 'green',
+                    border: '1px solid black',
+                    borderRadius: '10px',
+                    boxShadow: '1px 1px 5px'
+                }}>
           {isSubmitting ? 'Saving...' : initialContact ? 'Save Changes' : 'Add Contact'}
         </button>
-        <button type="button" onClick={onCancel} disabled={isSubmitting}>
+        <button 
+                type="button" 
+                onClick={onCancel}
+                disabled={isSubmitting}
+                style={{
+                    backgroundColor: 'red',
+                    height: '25px',
+                    border: '1px solid black',
+                    borderRadius: '10px',
+                    marginLeft: '23rem',
+                    boxShadow: '1px 1px 5px #a50b0b'
+                }}>
           Cancel
         </button>
       </div>

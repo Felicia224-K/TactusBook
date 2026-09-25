@@ -42,15 +42,36 @@ export default function Contacts() {
   }
 
   return (
-    <div style={{ maxWidth: 700, margin: '2rem auto', padding: '0 1rem' }}>
+    <div style={{ 
+                maxWidth: 700, 
+                margin: '2rem auto', 
+                padding: '0 1rem',
+                    
+            }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
         <div>
           <h1 style={{ margin: 0 }}>My Contacts</h1>
-          <p style={{ margin: 0, color: '#666' }}>Logged in as {user?.name}</p>
+          <p style={{ margin: 0, color: '#666' }}>Hey {user?.name} Enjoy TactusBook</p>
         </div>
         <div style={{ display: 'flex', gap: '0.5rem' }}>
-          <button onClick={() => setFormMode('create')}>+ Add Contact</button>
-          <button onClick={logout}>Log out</button>
+          <button 
+                 style={{
+                    backgroundColor: 'green',
+                    border: '1px solid black',
+                    borderRadius: '10px',
+                    boxShadow: '1px 1px 5px',
+                    height: '25px',
+                }}
+                onClick={() => setFormMode('create')}>+ Add Contact</button>
+          <button 
+                 style={{
+                    backgroundColor: 'red',
+                    border: '1px solid black',
+                    borderRadius: '10px',
+                    height:'25px',
+                    boxShadow: '1px 1px 5px'
+                }}
+                onClick={logout}>Log out</button>
         </div>
       </div>
 

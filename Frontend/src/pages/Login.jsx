@@ -108,7 +108,7 @@ export default function Login() {
             style={{ 
                 marginTop: '1rem',
                 backgroundColor: isHovered? 'rgb(191, 182, 239)' : 'rgb(25, 112, 251)',
-                width: '100px',
+                width: '150px',
                 height: '30px',
                 fontSize: '20px',
                 border: 'none',
