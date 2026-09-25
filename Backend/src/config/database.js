@@ -1,11 +1,23 @@
 const { Sequelize } = require('sequelize');
 require('dotenv').config(); 
 
-// 1. Initialize the Sequelize connection pool
+const databaseUrl = process.env.DATABASE_URL;
+
+if (!databaseUrl) {
+    console.error("CRITICAL: DATABASE_URL variable is completely missing!");
+}
+
+
 const sequelize = new Sequelize(
-    process.env.DATABASE_URL, {
+    databaseUrl, {
         dialect: 'postgres',
-        logging: console.log 
+        logging: false,
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false
+            }
+        }
     }
 );
 
