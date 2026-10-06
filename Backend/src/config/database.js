@@ -12,12 +12,7 @@ const sequelize = new Sequelize(
     databaseUrl, {
         dialect: 'postgres',
         logging: false,
-        dialectOptions: {
-            ssl: {
-                require: true,
-                rejectUnauthorized: false
-            }
-        }
+        
     }
 );
 
